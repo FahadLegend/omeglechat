@@ -133,7 +133,6 @@ video{
     align-items: center;
     font-weight: bold;
     cursor: pointer;
-    pointer-events: none;
 }
 
 .type-message{
