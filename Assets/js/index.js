@@ -216,7 +216,7 @@ let createAnswer = async (data) => {
     receiver: data.username,
   });
   console.log("from answer");
-  document.querySelector(".next-chat").style.pointerEvents = "auto";
+ // document.querySelector(".next-chat").style.pointerEvents = "auto";
   $.ajax({
     url: "/update-on-engagement/" + username + "",
     type: "PUT",
@@ -232,7 +232,7 @@ let addAnswer = async (data) => {
   if (!peerConnection.currentRemoteDescription) {
     peerConnection.setRemoteDescription(data.answer);
   }
-  document.querySelector(".next-chat").style.pointerEvents = "auto";
+//  document.querySelector(".next-chat").style.pointerEvents = "auto";
   $.ajax({
     url: "/update-on-engagement/" + username + "",
     type: "PUT",
