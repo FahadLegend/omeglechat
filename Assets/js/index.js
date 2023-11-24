@@ -79,6 +79,7 @@ let servers = {
   ],
 };
 
+peerConnection = new RTCPeerConnection(servers);
 let createPeerConnection = async () => {
   peerConnection = new RTCPeerConnection(servers);
 
@@ -216,7 +217,7 @@ let createAnswer = async (data) => {
     receiver: data.username,
   });
   console.log("from answer");
- // document.querySelector(".next-chat").style.pointerEvents = "auto";
+  document.querySelector(".next-chat").style.pointerEvents = "auto";
   $.ajax({
     url: "/update-on-engagement/" + username + "",
     type: "PUT",
@@ -232,7 +233,7 @@ let addAnswer = async (data) => {
   if (!peerConnection.currentRemoteDescription) {
     peerConnection.setRemoteDescription(data.answer);
   }
-//  document.querySelector(".next-chat").style.pointerEvents = "auto";
+  document.querySelector(".next-chat").style.pointerEvents = "auto";
   $.ajax({
     url: "/update-on-engagement/" + username + "",
     type: "PUT",
@@ -352,11 +353,13 @@ async function closeConnection() {
   console.log("From closeConnection");
 }
 $(document).on("click", ".next-chat", function () {
+  console.log("peerConnection:", peerConnection);
+
   document.querySelector(".chat-text-area").innerHTML = "";
-  // if (
-  //   peerConnection.connectionState === "connected" ||
-  //   peerConnection.iceCandidateState === "connected"
-  // ) {
+  if (
+    peerConnection.connectionState === "connected" ||
+    peerConnection.iceCandidateState === "connected"
+  ) {
   closeConnection();
   peerConnection.oniceconnectionstatechange = (event) => {
     if (
@@ -367,9 +370,9 @@ $(document).on("click", ".next-chat", function () {
       console.log("Peer connection closed.");
     }
   };
-  //   console.log("User closed");
-  // } else {
-  //   fetchNextUser(remoteUser);
-  //   console.log("Moving to next user");
-  // }
+    console.log("User closed");
+  } else {
+    fetchNextUser(remoteUser);
+    console.log("Moving to next user");
+  }
 });
