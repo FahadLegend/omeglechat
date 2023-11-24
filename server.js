@@ -3,12 +3,12 @@ const path = require("path");
 const bodyparser = require("body-parser");
 
 const app = express();
-const helmet = require('helmet');
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    scriptSrc: ["'self'", "'unsafe-eval'"]
-  }
-}));
+//const helmet = require('helmet');
+//app.use(helmet.contentSecurityPolicy({
+//  directives: {
+//    scriptSrc: ["'self'", "'unsafe-eval'"]
+//  }
+//}));
 const connectDB = require("./Server/database/connection");
 
 
